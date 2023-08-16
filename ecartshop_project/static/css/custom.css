@@ -1,0 +1,80 @@
+.nav-item
+{
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.nav-item-head
+{
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.dropdown-item
+{
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.footer1
+{
+    background-color: #f8f8f8;
+    height: 60px;
+}
+
+.footer1 p
+{
+    padding-top: 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.my_row_class
+{
+    padding-top: 15px;
+
+}
+
+.my_row_class .mx_auto
+{
+    color: #000;
+    font-size: 12px;
+}
+
+.my_bottom_margin
+{
+    margin-bottom: 10px;
+
+}
+
+.my_search_text
+{
+padding-top:20px;
+}
+
+.my_custom_table
+{
+min-width:400px;
+font-size:14px;
+}
+
+.custom_thead
+{
+font-weight:normal;
+background-color:#f8f8f8!important;
+    text-transform: uppercase;
+}
+.custom_a
+{
+text-decoration:none;
+    text-transform: uppercase;
+    color:grey;
+}
+
+.custom_icon
+{
+text-decoration:none;
+}
+

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+      Convenient and time-saving way to shop for daily essentials.
+{% endblock %}
+
+{% block title %}
+Search Result
+{% endblock %}
+
+{% block content %}
+<div>
+  <p class="my_search_text">Search Result for:<b>"{{query}}"</b></p>
+</div>
+
+<div class="container-fluid">
+    <div class="row mx_auto">
+        {% for product in products %}
+        <div class="my_bottom_margin col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="card" style="max-width:18rem;">
+                <a href="{{product.get_url}}"><img class="card-img-top image1" src="{{product.image.url}}" alt="{{product.name}}"></a>
+                <div class="card-body">
+                <h5 class="card-title nav-item-head">{{product.name}}</h5>
+                <p class="card-text nav-item">Rs.{{product.price}}</p>
+                </div>
+            </div>
+            <br>
+        </div>
+        {% empty %}
+        <div class="row mx-auto">
+            <p class="my_search_text nav-item"> 0 Result Found</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

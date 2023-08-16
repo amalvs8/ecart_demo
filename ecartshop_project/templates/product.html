@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+      {{product.description|truncatewords:155}}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+      {{ product.name }} - Growcery Store
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div>
+  <div>
+    <p class="nav-link nav-item"><a href="{% url 'shop:allProdCat' %}">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a> | {{product.name}}</p>
+  </div>
+</div>
+<br>
+
+<div class="container-fluid">
+<div class="row max-auto">
+    <div class="col=12 col-sm-12 col-md12 col-lg-8">
+<div class="container-fluid">
+    <div class="row max-auto">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div>
+                <img class="image_product card-img" src="{{product.image.url}}" alt="{{product.name}}">
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+        <h5 class="nav-item-head card-title"><b>{{product.name}}</b></h5>
+            <p class="nav-item card-text">Rs. {{product.price}}</p>
+        <p class="nav-item card-text">Product Description</p>
+        <p class="text-justify nav-item card-text">{{product.description}}</p>
+      {% if product.stock <= 0 %}
+          <p><b>Out of Stock</b></p>
+      {% else %}
+            <a href="{% url 'cart:add_cart' product.id %}" class="nav-item btn btn-secondary btn-block my_custom_button">Add to Cart</a><br>
+      {% endif %}
+        </div>
+    </div>
+</div>
+        </div>
+    <div class="col=12 col-sm-12 col-md-6 col-lg-4">
+<div class="container-fluid">
+    <div class="row mx_auto">
+        <br><h5 class="nav-item-head card-title"><b><br>Suggestions for You</b></h5>
+        {% for i in product_list %}
+        <div class="my_bottom_margin col-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="card" style="max-width:12rem;">
+                <a href="{{i.get_url}}"><img class="card-img-top image1" src="{{i.image.url}}" alt="{{i.name}}"></a>
+                <div class="card-body">
+                <h5 class="card-title nav-item-head">{{i.name}}</h5>
+                    {% if i.stock != 0 %}
+                    <p class="card-text nav-item">In Stock | Rs.{{i.price}}</p>
+                    {% else %}
+                    <p class="card-text nav-item">Out of Stock | Rs.{{i.price}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+</div>
+                </div>
+</div>
+    </div>
+{% endblock %}

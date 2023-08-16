@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+   {% if category %}
+      {{category.description|truncatewords:155}}
+   {% else %}
+      Welcome to Growcery Store. Convenient and time-saving way to shop for daily essentials.
+   {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+      {{ category.name }} - Growcery Store
+    {% else %}
+      See Categories
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="mx_auto">
+      {% if category %}
+      <img src="{{category.image.url}}" class="img-fluid card-img image2" alt="{{category.name}}">
+    </div>
+  </div>
+
+<br>
+<div class="container-fluid">
+  <h1 class="nav-item-head"><b>{{category.name}}</b></h1>
+  <p class="text-justify nav-item">{{category.description}}</p>
+</div>
+  {% else %}
+  <br>
+
+
+  <div class="container-fluid">
+      <div class="row max_auto">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                  <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/vegetables.png' %}" style="object-fit:cover; height:150px; max-width:100%;" class="d-block w-100" alt="cover">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static 'img/fruits.jpg' %}" style="object-fit:cover; height:150px; max-width:100%;" class="d-block w-100" alt="cover">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static 'img/dairy.jpg' %}" style="object-fit:cover; height:150px; max-width:100%;" class="d-block w-100" alt="cover">
+                    </div>
+
+                  </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <br><h1 class="nav-item-head"><b>See Products</b></h1>
+                <p class="nav-item text-justify">Online grocery stores are a convenient and time-saving way to shop for daily essentials. They offer a wide range of products, from fresh fruits and vegetables to dairy, bakery, snacks, and branded foods. Customers can order online through websites or apps and get their groceries delivered to their doorstep in as little as 30 minutes.</p>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+
+<br>
+
+<div class="container-fluid">
+    <div class="row mx_auto">
+        {% for product in products.object_list %}
+        <div class="my_bottom_margin col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="card" style="max-width:18rem;">
+                <a href="{{product.get_url}}"><img class="card-img-top image1" src="{{product.image.url}}" alt="{{product.name}}"></a>
+                <div class="card-body">
+                <h5 class="card-title nav-item-head"><b>{{product.name}}</b></h5>
+                    {% if product.stock != 0 %}
+                    <p class="card-text nav-item">In Stock | Rs.{{product.price}}</p>
+                    {% else %}
+                    <p class="card-text nav-item">Out of Stock | Rs.{{product.price}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mx-auto">
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div>
+            {% for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <br>
+</div>
+
+{% endblock %}
